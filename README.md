@@ -2,13 +2,12 @@
 
 This is a technical assessment project for Mevo.
 
-![image](https://github.com/streetstreet0/BasicMevoApp/assets/94080063/2588ebb6-6d47-454a-a6f3-272cfed278f3)
-
-
 # Description
 
 This project queries Mevo's public API's and displays the location of vehicles in wellington as pin markers on a map. It also displays the Mevo parking zones.
 This project was meant to use MapBox for the map, but I had to use Osmroid instead due to certain limitations (metioned privately).
+
+![image](https://github.com/streetstreet0/BasicMevoApp/assets/94080063/2588ebb6-6d47-454a-a6f3-272cfed278f3)
 
 # Installation
 
