@@ -15,13 +15,19 @@
 <!--        android:textAlignment="center"-->
 <!--    />-->
 
-    <ListView
-        android:id="@+id/testList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tabs"
-        android:layout_marginBottom="-2dp"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/list_item" />
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tilesource="Mapnik"/>
+
+<!--    <ListView-->
+<!--        android:id="@+id/testList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_above="@+id/tabs"-->
+<!--        android:layout_marginBottom="-2dp"-->
+<!--        android:scrollbars="vertical"-->
+<!--        tools:listitem="@layout/list_item" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

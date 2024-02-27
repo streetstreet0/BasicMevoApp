@@ -1,6 +1,10 @@
 package com.example.basicmivoapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -12,9 +16,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,6 +37,12 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,17 +59,62 @@ public class MainActivity extends AppCompatActivity {
     private String parkingEndpoint = "/parking/wellington";
     private String vehicleEndpoint = "/vehicles/wellington";
     private ArrayList<String> dataList;
+    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    private MapView map;
+    private final double defaultLongitude = 174.77557;
+    private final double defaultLatitude = -41.28664;
+    private final double defaultZoom = 12.5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Context context = getApplicationContext();
+        Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
+
         setContentView(R.layout.activity_main);
 
-        testList = (ListView) findViewById(R.id.testList);
-        requestData();
+        map = (MapView) findViewById(R.id.map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+
+        requestPermissionsIfNecessary(new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE});
+
+
+        map.setMultiTouchControls(true);
+        IMapController mapController = map.getController();
+        mapController.setZoom(defaultZoom);
+        GeoPoint startPoint = new GeoPoint(defaultLatitude, defaultLongitude);
+        mapController.setCenter(startPoint);
+
+//        testList = (ListView) findViewById(R.id.testList);
+//        requestData();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+//        requestData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        map.onResume();
+
+//        requestData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        map.onPause();
     }
 
     private void requestData() {
+        // clear any old data before retrieving new data
         dataList = new ArrayList<String>();
         JsonObjectRequest vehicleRequest = new JsonObjectRequest(Request.Method.GET, baseUrl + vehicleEndpoint, null, new Response.Listener<JSONObject>() {
             @Override
@@ -182,5 +242,17 @@ public class MainActivity extends AppCompatActivity {
 //        return (coordinatePairingOne.getDouble(0) == coordinatePairingTwo.getDouble(0)) &&
 //                (coordinatePairingOne.getDouble(1) == coordinatePairingTwo.getDouble(1));
 //    }
+
+    private void requestPermissionsIfNecessary(String[] permissions) {
+        ArrayList<String> permissionsToRequest = new ArrayList<String>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(permission);
+            }
+        }
+        if (permissionsToRequest.size() > 0) {
+            ActivityCompat.requestPermissions(this, permissionsToRequest.toArray(new String[0]), REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
 }
 
