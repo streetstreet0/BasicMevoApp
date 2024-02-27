@@ -7,12 +7,21 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/testData"
+<!--    <TextView-->
+<!--        android:id="@+id/testData"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="default text"-->
+<!--        android:textAlignment="center"-->
+<!--    />-->
+
+    <ListView
+        android:id="@+id/testList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="default text"
-        android:textAlignment="center"
-    />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tabs"
+        android:layout_marginBottom="-2dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
