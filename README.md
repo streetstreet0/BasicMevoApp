@@ -11,8 +11,9 @@ This project was meant to use MapBox for the map, but I had to use Osmroid inste
 
 # Installation
 
-The project can be compiled in Android Studio and ran on a virtual machine running Android version 10.0 or newer. It was developed specifically for a Pixel 2 API 30, more recent versions have not been tested. In a future update, a runnable apk.
+The project can be compiled in Android Studio and ran on a virtual machine running Android version 10.0 or newer. It was developed specifically for a Pixel 2 API 30, more recent versions have not been tested.  
+A runnable apk is also included. The apk is in app/release/app-release.apk.
 
 # Project Status
 
-There is only one feature left to be added: A runnable apk file. After this is developed, the project will be finished and closed.
+The project is finished and closed.
