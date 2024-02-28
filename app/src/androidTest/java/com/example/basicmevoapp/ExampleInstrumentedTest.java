@@ -1,4 +1,4 @@
-package com.example.basicmivoapp;
+package com.example.basicmevoapp;
 
 import android.content.Context;
 

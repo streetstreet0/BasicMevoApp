@@ -1,4 +1,4 @@
-package com.example.basicmivoapp;
+package com.example.basicmevoapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
