@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.basicmivoapp'
+    namespace 'com.example.basicmevoapp'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.basicmivoapp"
+        applicationId "com.example.basicmevoapp"
         minSdk 29
         targetSdk 34
         versionCode 1

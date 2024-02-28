@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Basic Mivo App"
+rootProject.name = "Basic Mevo App"
 include ':app'
